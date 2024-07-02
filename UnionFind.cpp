@@ -47,12 +47,12 @@ int main(){
     int Ai, Bi; cin >> Ai >> Bi;
     //判定クエリ
     if (Pi){
-      if (UF.isSameGroup(Ai-1, Bi-1)) cout << "Yes" << endl;
+      if (UF.isSameGroup(Ai, Bi)) cout << "Yes" << endl;
       else cout << "No" << endl;
     }
     //連結クエリ
     else{
-      UF.unite(Ai-1, Bi-1);
+      UF.unite(Ai, Bi);
     }
   }
   
