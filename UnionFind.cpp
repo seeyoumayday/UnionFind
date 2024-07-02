@@ -23,7 +23,7 @@ UnionFind::UnionFind(int N){
 // This is Function that returns the root of x.
 int UnionFind::root(int x){
     if(parents[x] == x) return x;
-    return root(parents[x]);
+    return parents[x] = root(parents[x]);
 }
 
 // Put x and y in the same group.
@@ -34,4 +34,27 @@ void UnionFind::unite(int x, int y){
 
 bool UnionFind::isSameGroup(int x, int y){
     return root(x) == root(y);
+}
+
+int main(){
+  int N; cin >> N;
+  int Q; cin >> Q;
+  
+  //頂点番号のオフセットは０にする
+  UnionFind UF = UnionFind(N);
+  for (int i = 1; i <= Q; i++){
+    bool Pi; cin >> Pi;
+    int Ai, Bi; cin >> Ai >> Bi;
+    //判定クエリ
+    if (Pi){
+      if (UF.isSameGroup(Ai, Bi)) cout << "Yes" << endl;
+      else cout << "No" << endl;
+    }
+    //連結クエリ
+    else{
+      UF.unite(Ai, Bi);
+    }
+  }
+  
+  return 0;
 }
