@@ -35,3 +35,26 @@ void UnionFind::unite(int x, int y){
 bool UnionFind::isSameGroup(int x, int y){
     return root(x) == root(y);
 }
+
+int main(){
+  int N; cin >> N;
+  int Q; cin >> Q;
+  
+  //頂点番号のオフセットは０にする
+  UnionFind UF = UnionFind(N);
+  for (int i = 1; i <= Q; i++){
+    bool Pi; cin >> Pi;
+    int Ai, Bi; cin >> Ai >> Bi;
+    //判定クエリ
+    if (Pi){
+      if (UF.isSameGroup(Ai-1, Bi-1)) cout << "Yes" << endl;
+      else cout << "No" << endl;
+    }
+    //連結クエリ
+    else{
+      UF.unite(Ai-1, Bi-1);
+    }
+  }
+  
+  return 0;
+}
