@@ -23,7 +23,7 @@ UnionFind::UnionFind(int N){
 // This is Function that returns the root of x.
 int UnionFind::root(int x){
     if(parents[x] == x) return x;
-    return root(parents[x]);
+    return parents[x] = root(parents[x]);
 }
 
 // Put x and y in the same group.
