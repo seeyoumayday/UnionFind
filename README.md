@@ -1,4 +1,4 @@
-# UnionFind_Class
+# UnionFind
  This is a class of Union Find.
 
 I compressed the route to speed up the process.
