@@ -7,15 +7,17 @@ class UnionFind{
 private:
     // The parents of vertex number i is kept in parents[i].
     vector<int> parents;
+    int NumberofVertex;
 public:
     UnionFind(int N);
     int root(int x);
     void unite(int x, int y);
     bool isSameGroup(int x, int y);
+    void clear();
 };
 
 // In the beginning, every vertex makes itself a parents.
-UnionFind::UnionFind(int N){
+UnionFind::UnionFind(int N) : NumberofVertex(N){
     parents.resize(N);
     for (int i = 0; i < N; i++) parents[i] = i;
 }
@@ -24,6 +26,9 @@ UnionFind::UnionFind(int N){
 int UnionFind::root(int x){
     if(parents[x] == x) return x;
     return parents[x] = root(parents[x]);
+    /* If you choose not to make the process high speed,
+    then use the statement below.*/
+    //return root(parents[x]);
 }
 
 // Put x and y in the same group.
@@ -36,21 +41,24 @@ bool UnionFind::isSameGroup(int x, int y){
     return root(x) == root(y);
 }
 
+void UnionFind::clear(){
+    for (int i = 0; i < NumberofVertex; i++)parents[i] = i;
+}
+
 int main(){
   int N; cin >> N;
   int Q; cin >> Q;
   
-  //頂点番号のオフセットは０にする
   UnionFind UF = UnionFind(N);
   for (int i = 1; i <= Q; i++){
     bool Pi; cin >> Pi;
     int Ai, Bi; cin >> Ai >> Bi;
-    //判定クエリ
+    // Judgement query
     if (Pi){
       if (UF.isSameGroup(Ai, Bi)) cout << "Yes" << endl;
       else cout << "No" << endl;
     }
-    //連結クエリ
+    // Concatenation query
     else{
       UF.unite(Ai, Bi);
     }
